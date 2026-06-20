@@ -5,4 +5,4 @@ class CSVFileManager:
   def read(self) -> str:
     return pd.read_csv(self.path)  
   def write(self,dataFrame):
-    pass
+    dataFrame.to_csv(self.path, index=False)

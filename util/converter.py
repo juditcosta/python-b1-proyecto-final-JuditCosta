@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+from users import *
+from products import *
 #Write your code here
 
 class Converter(ABC):
@@ -11,13 +13,22 @@ class Converter(ABC):
 
 class CashierConverter(Converter):
   def convert(self,dataFrame):    
-    #Write your code here
-    pass
+    cashiers = []
+    for _, row in dataFrame.iterrows():
+      cashiers.append(Cashier(str(row["dni"]), row["name"], int(row["age"]), row["timetable"], float(row["salary"])))
+      return cashiers
 
 class CustomerConverter(Converter):
-  #Write your code here
-  pass
+  def convert(self,dataFrame):    
+    customers = []
+    for _, row in dataFrame.iterrows():
+      customers.append(Customer(str(row["dni"]), row["name"], int(row["age"]), row["email"], row["postalcode"]))
+      return customers
 
 class ProductConverter(Converter):
-  #Write your code here
-  pass
+    def convert(self, dataFrame, *args):
+        productClass = args[0]
+        products = []
+        for _, row in dataFrame.iterrows():
+            products.append(productClass(str(row["id"]), row["name"], float(row["price"])))
+        return products

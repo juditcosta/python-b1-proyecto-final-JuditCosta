@@ -8,12 +8,10 @@ class Order:
     self.products = []
 
   def add(self, product : Product):
-    #Write your code here
-    pass
+    self.products.append(product)
 
   def calculateTotal(self) -> float:
-    #Write your code here
-    pass
+    return round(sum(product.price for product in self.products), 2)
   
   def show(self):    
     print("Hello : "+self.customer.describe())
